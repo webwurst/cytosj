@@ -2,6 +2,8 @@
 
 Convert `docker-compose.yml` files to `swarm.json`
 
+Read: Cytos-Jay
+
 ## Usage:
 
 ```
