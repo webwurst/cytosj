@@ -1,0 +1,31 @@
+# from https://github.com/dockito/compose2bash/blob/master/examples/docker-compose.yml
+redis:
+  image: redis:2.8
+  ports:
+    - 6379
+
+api:
+  command: npm start
+  image: docker.mydomain.com/api:latest
+  ports:
+    - 3000
+  environment:
+    VIRTUAL_PORT: 3000
+    VIRTUAL_HOST: api.mydomain.com
+    NODE_ENV: development
+    MONGO_DATABASE: develop_api
+  volumes:
+    - .:/src
+  links:
+    - 'redis:redis'
+
+app:
+  image: docker.mydomain.com/app:latest
+  ports:
+    - 80
+  environment:
+    VIRTUAL_HOST: app.mydomain.com
+    VIRTUAL_PORT: 80
+    NODE_ENV: production
+    API_URL: http://api.mydomain.com
+  privileged: True

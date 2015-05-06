@@ -1,0 +1,8 @@
+first:
+    image: redis
+    ports:
+     - "6379:6379"
+second:
+    build: .
+    links:
+     - "first:firstalias"

@@ -1,0 +1,33 @@
+{
+  "app_name": "", 
+  "services": [
+    {
+      "components": [
+        {
+          "component_name": "second", 
+          "dependencies": [
+            {
+              "alias": "firstalias", 
+              "name": "first/first", 
+              "port": 6379
+            }
+          ], 
+          "image": ""
+        }
+      ], 
+      "service_name": "second"
+    }, 
+    {
+      "components": [
+        {
+          "component_name": "first", 
+          "image": "redis", 
+          "ports": [
+            6379
+          ]
+        }
+      ], 
+      "service_name": "first"
+    }
+  ]
+}
