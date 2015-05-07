@@ -80,10 +80,15 @@ def transform(source, app_name):
             elif attribute == "volumes":
                 service["components"][0]["volumes"] = []
                 for volume in source[unit]["volumes"]:
-                    # TODO:
-                    # - allow for '<path>' only format
-                    # - allow for '<path>:<path>:ro' format
-                    host_path, container_path = volume.split(":")
+                    if ":" in volume:
+                        parts = volume.split(":")
+                        if len(parts) == 2:
+                            host_path, container_path = parts
+                        else:
+                            host_path, container_path, mode = parts
+                            warnings.add("The volume mode '%s' for volume '%s' has been ignored" % (mode, container_path))
+                    else:
+                        container_path = volume
                     service["components"][0]["volumes"].append({
                         "path": container_path,
                         "size": "2 GB"  # default (smallest possible)
