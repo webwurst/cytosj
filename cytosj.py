@@ -118,6 +118,10 @@ def transform(source, app_name):
                     # Gotcha: We assume that the dependency always points
                     # to the first port exposed!
                     link = sj["services"][s]["components"][c]["dependencies"][dep]["name"]
+                    if link not in portmap:
+                        warnings.add("The component '%s' has no exposed port. Dependencies to this component are incomplete." % link)
+                    elif len(portmap[link]) > 1:
+                        warnings.add("The component '%s' has more than one port exposed. Dependencies will point to the first port." % link)
                     sj["services"][s]["components"][c]["dependencies"][dep]["port"] = portmap[link][0]
 
     # Print warnings
