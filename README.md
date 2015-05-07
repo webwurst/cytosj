@@ -37,7 +37,9 @@ Use `-h` for details.
 * `expose` is ignored (currently)
 * `env_file` is ignored (currently)
 * `extends` is ignored (currently)
+* `entrypoint` is ignored (currently)
 * `external_links` is ignored (and probably will be forever)
-* Doesn't translate `volumes_from`, since Giant Swarm doesn't support this
+* `volumes_from` is ignored (since not supported by Giant Swarm)
+* Also ignores `net`, `pid`, `dns`, `cap_add`, `cap_drop`, `dns_search`, `working_dir`, `user`, `hostname`, `domainname`, `mem_limit`, `privileged`, `restart`, `stdin_open`, `tty`, `cpu_shares`
 * For `volumes`, so far only the `HOST:CONTAINER` format is supported
 * If a dependency points to a component with multiple `ports` entries, the first port is used for that dependency automatically.
