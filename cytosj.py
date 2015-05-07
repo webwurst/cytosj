@@ -53,11 +53,10 @@ def transform(source, app_name):
                 # image validation
                 if "/" in source[unit]["image"]:
                     parts = source[unit]["image"].split("/")
-                    if len(parts) == 2 or len(parts) > 3:
+                    if len(parts) > 3:
                         warnings.add("The image '%s' is invalid. Please change to format 'registry.giantswarm.io/<organization>/<imagename>[:<tag>]'." % source[unit]["image"])
-                    if len(parts) > 1:
-                        if parts[0] != 'registry.giantswarm.io':
-                            warnings.add("The image '%s' uses an invalid registry name '%s'. Please change to 'registry.giantswarm.io'." % (source[unit]["image"], parts[0]))
+                    if len(parts) > 2 and "." in parts[0] and parts[0] != 'registry.giantswarm.io':
+                        warnings.add("The image '%s' uses an invalid registry name '%s'. Please change to 'registry.giantswarm.io'." % (source[unit]["image"], parts[0]))
             
             elif attribute == "ports":
                 portmap_key = "%s/%s" % (unit, unit)
