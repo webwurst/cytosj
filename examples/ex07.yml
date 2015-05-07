@@ -1,0 +1,3 @@
+jenkins:
+  image: jenkins:1.584
+  ports: ["8080:8080"]

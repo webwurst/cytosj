@@ -1,0 +1,49 @@
+{
+  "app_name": "", 
+  "services": [
+    {
+      "components": [
+        {
+          "args": [
+            "go", 
+            "run", 
+            "src/github.com/ansible-in/prototype-anarcher/cmd/ansible.in/main.go"
+          ], 
+          "component_name": "api", 
+          "dependencies": [
+            {
+              "alias": "db", 
+              "name": "db/db", 
+              "port": 8080
+            }
+          ], 
+          "image": "", 
+          "ports": [
+            5000
+          ], 
+          "volumes": [
+            {
+              "path": "/gopath/src", 
+              "size": "2 GB"
+            }
+          ]
+        }
+      ], 
+      "service_name": "api"
+    }, 
+    {
+      "components": [
+        {
+          "component_name": "db", 
+          "image": "dockerfile/rethinkdb", 
+          "ports": [
+            8080, 
+            28015, 
+            29015
+          ]
+        }
+      ], 
+      "service_name": "db"
+    }
+  ]
+}

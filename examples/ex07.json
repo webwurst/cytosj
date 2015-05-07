@@ -1,0 +1,17 @@
+{
+  "app_name": "", 
+  "services": [
+    {
+      "components": [
+        {
+          "component_name": "jenkins", 
+          "image": "jenkins:1.584", 
+          "ports": [
+            8080
+          ]
+        }
+      ], 
+      "service_name": "jenkins"
+    }
+  ]
+}

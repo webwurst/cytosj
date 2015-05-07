@@ -1,0 +1,91 @@
+{
+  "app_name": "", 
+  "services": [
+    {
+      "components": [
+        {
+          "component_name": "serf", 
+          "image": "ctlc/serf", 
+          "ports": [
+            7373, 
+            7946
+          ]
+        }
+      ], 
+      "service_name": "serf"
+    }, 
+    {
+      "components": [
+        {
+          "component_name": "web", 
+          "dependencies": [
+            {
+              "alias": "serf", 
+              "name": "serf/serf", 
+              "port": 7373
+            }, 
+            {
+              "alias": "db", 
+              "name": "db/db", 
+              "port": 3306
+            }
+          ], 
+          "env": {
+            "DB_PASSWORD": "38uf8hhf38h", 
+            "DB_USER": "root"
+          }, 
+          "image": "ctlc/wordpress", 
+          "ports": [
+            80
+          ]
+        }
+      ], 
+      "service_name": "web"
+    }, 
+    {
+      "components": [
+        {
+          "component_name": "db", 
+          "dependencies": [
+            {
+              "alias": "serf", 
+              "name": "serf/serf", 
+              "port": 7373
+            }
+          ], 
+          "env": {
+            "MYSQL_DATABASE": "wordpress", 
+            "MYSQL_ROOT_PASSWORD": "38uf8hhf38h"
+          }, 
+          "image": "orchardup/mysql", 
+          "ports": [
+            3306
+          ]
+        }
+      ], 
+      "service_name": "db"
+    }, 
+    {
+      "components": [
+        {
+          "component_name": "lb", 
+          "dependencies": [
+            {
+              "alias": "serf", 
+              "name": "serf/serf", 
+              "port": 7373
+            }
+          ], 
+          "env": {
+            "HAPROXY_PASSWORD": "38uf8hhf38h"
+          }, 
+          "image": "ctlc/haproxy", 
+          "ports": [
+            80
+          ]
+        }
+      ], 
+      "service_name": "lb"
+    }
+  ]
+}

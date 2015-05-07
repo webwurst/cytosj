@@ -1,0 +1,84 @@
+{
+  "app_name": "", 
+  "services": [
+    {
+      "components": [
+        {
+          "component_name": "graph", 
+          "image": "", 
+          "ports": [
+            7474
+          ], 
+          "volumes": [
+            {
+              "path": "/data", 
+              "size": "2 GB"
+            }
+          ]
+        }
+      ], 
+      "service_name": "graph"
+    }, 
+    {
+      "components": [
+        {
+          "component_name": "meta", 
+          "env": {
+            "MYSQL_ROOT_PASSWORD": "root"
+          }, 
+          "image": "mysql:5.5", 
+          "ports": [
+            3306
+          ], 
+          "volumes": [
+            {
+              "path": "/var/lib/mysql", 
+              "size": "2 GB"
+            }, 
+            {
+              "path": "/usr/local/mysql/data", 
+              "size": "2 GB"
+            }
+          ]
+        }
+      ], 
+      "service_name": "meta"
+    }, 
+    {
+      "components": [
+        {
+          "args": [
+            "java", 
+            "-Dconfig.file=/app/dswarm.conf", 
+            "-jar", 
+            "/app/dswarm.jar"
+          ], 
+          "component_name": "dswarm", 
+          "dependencies": [
+            {
+              "alias": "meta", 
+              "name": "meta/meta", 
+              "port": 3306
+            }, 
+            {
+              "alias": "graph", 
+              "name": "graph/graph", 
+              "port": 7474
+            }
+          ], 
+          "image": "", 
+          "ports": [
+            8087
+          ], 
+          "volumes": [
+            {
+              "path": "/data/files", 
+              "size": "2 GB"
+            }
+          ]
+        }
+      ], 
+      "service_name": "dswarm"
+    }
+  ]
+}

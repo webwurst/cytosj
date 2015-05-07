@@ -1,0 +1,30 @@
+{
+  "app_name": "", 
+  "services": [
+    {
+      "components": [
+        {
+          "component_name": "frontend", 
+          "env": [
+            "NODE_ENV=production"
+          ], 
+          "image": "bitliner/static-node-2", 
+          "ports": [
+            80
+          ], 
+          "volumes": [
+            {
+              "path": "/usr/src/app/dist", 
+              "size": "2 GB"
+            }, 
+            {
+              "path": "/usr/src/app/logs", 
+              "size": "2 GB"
+            }
+          ]
+        }
+      ], 
+      "service_name": "frontend"
+    }
+  ]
+}

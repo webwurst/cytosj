@@ -1,0 +1,17 @@
+# https://github.com/ansible-in/prototype-anarcher/blob/a7b62a2cdde660ee920c9f3b1f98b4e39975cc4f/fig.dev.yml
+db:
+    image: dockerfile/rethinkdb
+    ports:
+        - "8080:8080"
+        - "28015:28015"
+        - "29015:29015"
+api:
+    build: .
+    command: go run src/github.com/ansible-in/prototype-anarcher/cmd/ansible.in/main.go 
+    volumes:
+        - ../../../:/gopath/src
+    links:
+        - db
+    ports:
+        - "5000:5000"
+ 
