@@ -159,4 +159,5 @@ if __name__ == "__main__":
 
     with open(output_name, "wb") as jsonfile:
         print("Writing result to %s" % output_name)
-        jsonfile.write(json.dumps(sj, indent=2, sort_keys=True))
+        out = json.dumps(sj, indent=2, sort_keys=True)
+        jsonfile.write(out.encode('utf-8'))

@@ -1,0 +1,8 @@
+FROM python:3.3-slim
+
+ADD examples /examples
+ADD cytosj.py /
+
+RUN pip install pyyaml > /dev/null
+
+ENTRYPOINT ["python", "-u", "/cytosj.py", "-o", "/examples/ex02.yml"]

@@ -33,7 +33,6 @@ Use `-h` for details.
 
 ## Known limitations
 
-* Currently tested only on Python 2.7
 * `build` is not supported
 * `expose` is ignored (currently)
 * `env_file` is ignored (currently)
