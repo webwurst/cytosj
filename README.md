@@ -42,3 +42,4 @@ Use `-h` for details.
 * `volumes_from` is ignored (since not supported by Giant Swarm)
 * Also ignores `net`, `pid`, `dns`, `cap_add`, `cap_drop`, `dns_search`, `working_dir`, `user`, `hostname`, `domainname`, `mem_limit`, `privileged`, `restart`, `stdin_open`, `tty`, `cpu_shares`
 * If a dependency points to a component with multiple `ports` entries, the first port is used for that dependency automatically.
+* Circular references will be translated to JSON, but won't work with Giant Swarm. There won't be a warning for now.
