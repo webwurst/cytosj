@@ -9,7 +9,7 @@ Read: "Cytos-Jay"
 Requires the `yaml` package, which can be installed using
 
 ```
-pip install yaml
+pip install pyyaml
 ```
 
 Please use sudo to install globally.
